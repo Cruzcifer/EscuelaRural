@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Estudiantes</title>
+</head>
+<body>
+
+<div class="container mt-5">
+		<form action="/filtrarId" method="post">
+		  <div class="row ">
+		  	<div class=" col-8">
+			    <input type="number" class="form-control" id="txtIdentificador" name="txtId" required placeholder=" buscar por Id">
+			  </div>
+			  <div class="col-4">
+			  	<button type="submit" class="btn btn-primary">Buscar por Id</button>
+			  
+			  	
+			  </div>
+		  </div>
+					
+		</form>
+	</div>
+
+ <div class="container mt-5">
+    <a href="/preInsertar"><button class="btn btn-primary">Insertar</button></a>
+    </div>
+
+<div class="container mt-5">
+    <a href="/verCursos"><button class="btn btn-primary">Ver Cursos</button></a>
+    </div>
+<div class="container mt-5">
+
+    <h1>Lista de Estudiantes</h1>
+    <table class="table mt-5 text-center">
+     <thead class="table-primary">
+     
+        <tr>
+            <th scope ="col">ID</th>
+            <th scope ="col">Rut</th>
+            <th scope ="col">Nombre</th>
+            <th scope ="col">Apellido</th>
+            <th scope ="col">Correo</th>
+            <th scope ="col">Telefono</th>
+            
+            <th scope ="col">Cursos</th>
+             <th scope ="col">Descripcion</th>
+            
+             <th scope = "col" colspan = "2">accioes</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="estudiante : ${estudiantes}" >
+            <td th:text="${estudiante.idEstudiante}"></td>
+            <td th:text="${estudiante.rut}"></td>
+            <td th:text="${estudiante.nombreEstudiante}"></td>
+            <td th:text="${estudiante.apellidoEstudiante}"></td>
+            <td th:text="${estudiante.correo}"></td>
+            <td th:text="${estudiante.telefono}"></td>
+            <td th:each="curso : ${estudiante.curso}" th:text="${curso.nombreCurso}"></td>
+            <td th:each="curso : ${estudiante.curso}" th:text="${curso.descripcion}"></td>
+           
+            <td><a th:href="@{/preActualizar(txtId=${estudiante.idEstudiante})}"><button class="btn btn-success">Actualizar</button></a> </td>
+            <td><a th:href="@{/eliminar(txtId=${estudiante.idEstudiante})}"><button class="btn btn-danger">Eliminar</button></a> </td>
+       		
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
